@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <canvas id="demo"></canvas>
+</div>
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.bundle.min.js"></script>
+    <script>
+        let myChart;
+
+        function getChartConfig() {
+
+        }
+
+        function drawChart(config) {
+            if (myChart != null) {
+                myChart.destroy();
+            }
+            myChart = new Chart($("#demo").getContext("2d"), config);
+        }
+    </script>
+}
