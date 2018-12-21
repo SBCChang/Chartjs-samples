@@ -10,16 +10,32 @@
     <script src="~/Scripts/chartjs/Chart.bundle.min.js"></script>
     <script>
         let myChart;
+        drawChart(getChartConfig());
 
         function getChartConfig() {
+            return {
+                type: "line",
+                data: {
+                    datasets: [{
+                    }]
+                },
+                option: {
+                    xAxes: [{
+                        type: "time",
+                        distribution: "series",
+                    }],
+                    yAxes: [{
 
+                    }]
+                }
+            }
         }
 
         function drawChart(config) {
             if (myChart != null) {
                 myChart.destroy();
             }
-            myChart = new Chart($("#demo").getContext("2d"), config);
+            myChart = new Chart(document.getElementById("demo").getContext("2d"), config);
         }
     </script>
 }
