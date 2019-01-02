@@ -6,53 +6,9 @@
 <div>
     <canvas id="demo"></canvas>
 </div>
+
 @section scripts{
     <script src="~/Scripts/momentjs/moment.min.js"></script>
     <script src="~/Scripts/chartjs/Chart.min.js"></script>
-    <script>
-        let myChart;
-        drawChart(getChartConfig(getChartDatasets()));
-
-        function getChartDatasets() {
-            const result = [];
-            let start = moment()
-            while (start < moment().add(1, "d")) {
-                result.push({ x: start.format("YYYY/MM/DD HH:mm"), y: Math.random() });
-                start = start.add(1, "h")
-            }
-            return result;
-        }
-
-        function getChartConfig(data) {
-            return {
-                type: "line",
-                data: {
-                    datasets: [{
-                        label: "demo",
-                        backgroundColor: "lightblue",
-                        fill: false,
-                        data: data
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        xAxes: [{
-                            type: "time",
-                            display: true,
-                            distribution: "series"
-                        }],
-                        yAxes: [{
-                        }]
-                    }
-                }
-            }
-        }
-        function drawChart(config) {
-            if (myChart != null) {
-                myChart.destroy();
-            }
-            myChart = new Chart(document.getElementById("demo").getContext("2d"), config);
-        }
-    </script>
+    <script src="~/Scripts/view/linechart.index.js"></script>
 }
