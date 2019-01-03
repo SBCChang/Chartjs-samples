@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Chartjs_samples.Services;
 
 namespace Chartjs_samples.Controllers
 {
@@ -8,6 +9,11 @@ namespace Chartjs_samples.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult GetChartConfig()
+        {
+            return Json(ChartService.ReadLineChartConfig());
         }
 
     }
