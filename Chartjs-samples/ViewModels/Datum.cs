@@ -5,9 +5,9 @@ namespace Chartjs_samples.ViewModels
     public class Datum
     {
 
-        public DateTime Timestamp { get; set; }
+        public string Timestamp { get; set; }
 
-        public float? Value { get; set; }
+        public double? Value { get; set; }
 
     }
 }

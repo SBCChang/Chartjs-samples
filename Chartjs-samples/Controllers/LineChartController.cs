@@ -11,6 +11,7 @@ namespace Chartjs_samples.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult GetChartConfig()
         {
             return Json(ChartService.ReadLineChartConfig());

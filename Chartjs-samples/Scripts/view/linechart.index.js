@@ -1,26 +1,43 @@
 ﻿let myChart;
-drawChart(getChartConfig(getChartDatasets()));
+getChartConfig();
 
-function getChartDatasets() {
-    const result = [];
-    let start = moment()
-    while (start < moment().add(1, "d")) {
-        result.push({ x: start.format("YYYY/MM/DD HH:mm"), y: Math.random() });
-        start = start.add(1, "h")
-    }
-    return result;
+function getChartConfig() {
+
+    $.ajax({
+        url: $("#GetChartConfigUrl").val(),
+        method: "POST",
+        dataType: "json",
+        success: function (result) {
+            drawChart(setChartConfig(result));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("getChartConfig ajax error: " + errorThrown);
+        }
+    });
 }
 
-function getChartConfig(data) {
+function setChartConfig(config) {
+    let datasets = [];
+
+    $.each(config.Datasets, function (index, item) {
+        let data = [];
+
+        $.each(item.Data, function (index, item) {
+            data.push({ x: item.Timestamp, y: item.Value });
+        });
+
+        datasets.push({
+            label: item.Label,
+            backgroundColor: item.BackgroundColor,
+            fill: false,
+            data: data
+        })
+    });
+
     return {
         type: "line",
         data: {
-            datasets: [{
-                label: "demo",
-                backgroundColor: "lightblue",
-                fill: false,
-                data: data
-            }]
+            datasets: datasets
         },
         options: {
             responsive: true,
