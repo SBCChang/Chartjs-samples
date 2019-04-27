@@ -7,9 +7,9 @@ namespace Chartjs_samples.Services
     internal class ChartService
     {
 
-        internal static ChartConfig ReadLineChartConfig()
+        internal static ChartSetting ReadLineChartSetting()
         {
-            var result = new ChartConfig() { Datasets = new List<Dataset>() };
+            var result = new ChartSetting() { Datasets = new List<Dataset>() };
             var data = new List<Datum>();
             var now = DateTime.Now;
             var start = now;

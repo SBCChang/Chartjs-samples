@@ -12,9 +12,9 @@ namespace Chartjs_samples.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetChartConfig()
+        public ActionResult GetChartSetting()
         {
-            return Json(ChartService.ReadLineChartConfig());
+            return Json(ChartService.ReadLineChartSetting());
         }
 
     }

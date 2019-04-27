@@ -1,43 +1,33 @@
 ﻿let myChart;
-getChartConfig();
+initChart();
 
-function getChartConfig() {
-
+function initChart() {
     $.ajax({
-        url: $("#GetChartConfigUrl").val(),
+        url: $("#GetChartSettingUrl").val(),
         method: "POST",
         dataType: "json",
         success: function (result) {
-            drawChart(setChartConfig(result));
+            drawChart(result);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("getChartConfig ajax error: " + errorThrown);
+            console.log("GetChartSetting ajax error: " + errorThrown);
         }
     });
 }
 
-function setChartDatasets(config) {
-    let datasets = [];
+function drawChart(setting) {
+    const config = getChartConfig(setting);
 
-    $.each(config.Datasets, function (index, item) {
-        let data = [];
-
-        $.each(item.Data, function (index, item) {
-            data.push({ x: new Date(item.Timestamp), y: item.Value });
-        });
-
-        datasets.push({
-            label: item.Label,
-            backgroundColor: item.BackgroundColor,
-            fill: false,
-            data: data
-        })
-    });
-    return datasets;
+    if (config !== undefined) {
+        if (myChart != null) {
+            myChart.destroy();
+        }
+        myChart = new Chart(document.getElementById("demo").getContext("2d"), config);
+    }
 }
 
-function setChartConfig(config) {
-    const datasets = setChartDatasets(config);
+function getChartConfig(setting) {
+    const datasets = getChartDatasets(setting);
 
     return {
         type: "line",
@@ -65,9 +55,25 @@ function setChartConfig(config) {
         }
     }
 }
-function drawChart(config) {
-    if (myChart != null) {
-        myChart.destroy();
-    }
-    myChart = new Chart(document.getElementById("demo").getContext("2d"), config);
+
+function getChartDatasets(setting) {
+    const datasets = [];
+
+    $.each(setting.Datasets, function (index, item) {
+        const data = [];
+
+        $.each(item.Data, function (index, item) {
+            data.push({ x: new Date(item.Timestamp), y: item.Value });
+        });
+
+        datasets.push({
+            label: item.Label,
+            backgroundColor: item.BackgroundColor,
+            fill: false,
+            data: data
+        })
+    });
+    return datasets;
 }
+
+

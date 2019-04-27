@@ -148,7 +148,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ChartService.cs" />
-    <Compile Include="ViewModels\ChartConfig.cs" />
+    <Compile Include="ViewModels\ChartSetting.cs" />
     <Compile Include="ViewModels\Dataset.cs" />
     <Compile Include="ViewModels\Datum.cs" />
   </ItemGroup>

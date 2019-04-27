@@ -2,7 +2,7 @@
 
 namespace Chartjs_samples.ViewModels
 {
-    public class ChartConfig
+    public class ChartSetting
     {
 
         public List<Dataset> Datasets { get; set; }
