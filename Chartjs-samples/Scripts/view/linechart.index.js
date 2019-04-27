@@ -16,14 +16,14 @@ function getChartConfig() {
     });
 }
 
-function setChartConfig(config) {
+function setChartDatasets(config) {
     let datasets = [];
 
     $.each(config.Datasets, function (index, item) {
         let data = [];
 
         $.each(item.Data, function (index, item) {
-            data.push({ x: item.Timestamp, y: item.Value });
+            data.push({ x: new Date(item.Timestamp), y: item.Value });
         });
 
         datasets.push({
@@ -33,6 +33,11 @@ function setChartConfig(config) {
             data: data
         })
     });
+    return datasets;
+}
+
+function setChartConfig(config) {
+    const datasets = setChartDatasets(config);
 
     return {
         type: "line",
@@ -40,7 +45,6 @@ function setChartConfig(config) {
             datasets: datasets
         },
         options: {
-            responsive: true,
             scales: {
                 xAxes: [{
                     type: "time",
@@ -50,9 +54,9 @@ function setChartConfig(config) {
                             hour: "MM/DD HH:mm",
                             day: "MM/DD",
                             month: "MM/DD"
-                        }
+                        },
+                        tooltipFormat: "MM/DD HH:mm"
                     },
-                    display: true,
                     distribution: "series"
                 }],
                 yAxes: [{

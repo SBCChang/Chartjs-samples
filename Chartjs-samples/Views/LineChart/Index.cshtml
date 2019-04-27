@@ -2,8 +2,11 @@
 @{
     ViewBag.Title = "Index";
 }
+@section styles{
+    <link href="~/Content/site.linechart.css" rel="stylesheet" />
+}
 
-<div>
+<div class="chart-container">
     <canvas id="demo"></canvas>
 </div>
 @Html.Hidden("GetChartConfigUrl", Url.Action("GetChartConfig"))
